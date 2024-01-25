@@ -21,7 +21,9 @@ export const Paper = ({authors, title, conference, picUrl, award=""}) => {
     return (
         <div className="paper">
             {award && <div style={badgeStyle}><FaStar/> {award}</div>}
-            <img className="paper-pic" src={picUrl} alt={title}/>
+            <div className="paper-contianer">
+                <img className="paper-pic" src={picUrl} alt={title}/>
+            </div>
             <div className="paper-info">
                 <h4 style={style}>{title}</h4>
                 <p style={style}>{authors}</p>

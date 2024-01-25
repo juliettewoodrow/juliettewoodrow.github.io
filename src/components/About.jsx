@@ -5,15 +5,16 @@ export const About = (props) => {
     return (
         <div {...props}>
             <p>
-I am a second-year PhD student in Computer Science at Stanford University advised by Prof. Chris Piech and Prof. John Mitchell.
+I am a second-year PhD student in Computer Science at Stanford University advised by Prof. Chris Piech.
 </p>
 <p>
-My research interests lie in using generative AI to scale high quality and accessible education. 
-I am currently working on developing grounded tools to help students learn Computer Science.
-Additionally, I am passionate about using computers to make the world a more positive, and equitable place.
-</p>
-<p>
-    Previously, I completed a B.S. in Computer Science at the University of Washington, and a M.S. in Computer Science at UC Santa Barbara. Blah Blah Blah
+My research focuses on how we can leverage human-centered AI to improve access to education. At the core of my research is a drive to democratize education. I am dedicated to creating innovative tools that leverage the recent advancements in AI to enhance the teaching and learning experiences. 
+
+<p>In addition to researching this, I also greatly enjoy teaching and learning.</p>
+
+<p>Outside of research, I enjoy reading, hiking, listening to podcasts, and practicing or teaching pilates. If you have any book or podcast recommendations please send them my way! I try to read about 50 books each year and I am always looking for suggestions :)</p>
+
+
 </p>
         </div>
     )

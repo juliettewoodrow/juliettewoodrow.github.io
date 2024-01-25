@@ -40,7 +40,12 @@
 
 
 
-
+.paper-contianer {
+  width: 37%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 .paper {
@@ -49,7 +54,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  max-width: 340px;
+  width: 100%;
   margin: 1rem;
   padding: 1rem;
   border-radius: 1rem;
@@ -59,7 +64,8 @@
 }
 
 .paper-pic {
-  width: 37%;
+  max-width: 100%;
+  max-height: 100px;
 
 }
 
