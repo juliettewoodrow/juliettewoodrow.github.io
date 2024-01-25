@@ -9,7 +9,7 @@ export const Header = () => {
         <div style={{display: "flex", flexWrap: "wrap"}}>
             <Face imageUrl="juliette.JPG" />
             <div style={{display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "left"}}>
-                <h1 style={{marginBottom: "5px"}}>Sierra Wang</h1>
+                <h1 style={{marginBottom: "5px"}}>Juliette Woodrow</h1>
                 <h2 style={headerStyle}>Ph.D Student at Stanford University</h2>
                 <h3 style={headerStyle}><span>jwoodrow</span><span>@stanford.edu</span></h3>
                 <div style={{display: "flex", flexDirection: "row"}}>
