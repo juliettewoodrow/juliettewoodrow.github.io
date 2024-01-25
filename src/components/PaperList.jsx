@@ -5,6 +5,7 @@ export const PaperList = () => {
 
     return (
         <div className="paper-list">
+            <h1>Publications</h1>
             <Paper
                 authors={"J. Woodrow*, A. Malik, C. Piech"}
                 title={"AI Teaches the Art of Elegant Coding: Timely, Fair, and Helpful Style Feedback in a Global Course"}
