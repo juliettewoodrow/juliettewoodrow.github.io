@@ -7,6 +7,14 @@ export const PaperList = () => {
         <div className="paper-list">
             <h1>Publications</h1>
             <Paper
+                authors={"J. Woodrow, C. Piech"}
+                title={"Soft Grades: A Calibrated and Accurate Method for Course-Grade Estimation that Expresses Uncertainty"}
+                conference={"LAK 2025"}
+                award={""}
+                picUrl={"softgradesfigure.png"}
+                pdfUrl={"/pdfs/SoftGrades.pdf"}
+             />
+            <Paper
                 authors={"J. Woodrow, A. Malik, C. Piech"}
                 title={"AI Teaches the Art of Elegant Coding: Timely, Fair, and Helpful Style Feedback in a Global Course"}
                 conference={"SIGCSE 2024"}
@@ -19,6 +27,7 @@ export const PaperList = () => {
                 title={"TeachNow: Enabling Teachers to Provide Spontaneous, Realtime 1:1 Help in Massive Online Courses"}
                 conference={"ITiCSE 2024"}
                 picUrl={"overview_pic.jpg"}
+                pdfUrl={"/pdfs/TeachNow.pdf"}
             />
             <Paper
                 authors={"A. Malik*, J. Woodrow*, B. Capoor, T. Jefferson, M. Li, S. Wang, P. Wei, D. Demszky, J. Langer-Osuna, J. Zelenski, M. Sahami, C. Piech"}
