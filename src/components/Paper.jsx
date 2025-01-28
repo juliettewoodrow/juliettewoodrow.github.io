@@ -1,7 +1,7 @@
 import { FaStar } from "react-icons/fa";
 
 
-export const Paper = ({authors, title, conference, picUrl, award=""}) => {
+export const Paper = ({authors, title, conference, picUrl, award="", pdfUrl}) => {
     const style = {
         marginBottom: "4px",
         marginTop: "2px"
@@ -25,7 +25,7 @@ export const Paper = ({authors, title, conference, picUrl, award=""}) => {
                 <img className="paper-pic" src={picUrl} alt={title}/>
             </div>
             <div className="paper-info">
-                <h4 style={style}>{title}</h4>
+                <h4 style={style}><a href={pdfUrl}>{title}</a></h4>
                 <p style={style}>{authors}</p>
                 <p style={style}><i>{conference}</i></p>
             </div>

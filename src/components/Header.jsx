@@ -1,5 +1,5 @@
 import { Face } from "./Face"
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa"
+import { FaGithub, FaLinkedin, FaEnvelope, FaTwitter } from "react-icons/fa"
 import { useState } from "react";
 
 
@@ -34,11 +34,12 @@ export const Header = ({setIsDungeon}) => {
                     <h2 style={headerStyle}>Ph.D Student at Stanford University</h2>
                     <h3 style={headerStyle}><span>jwoodrow</span><span>@stanford.edu</span></h3>
                     <div style={{display: "flex", flexDirection: "row"}}>
+                        <a href="https://twitter.com/juliettewoodrow" aria-label="Twitter Link"><FaTwitter style={{marginRight: "5px", fontSize:"xx-large", color: "#1DA1F2"}}/></a>
                         <a href="https://github.com/juliettewoodrow" aria-label="Github Link" ><FaGithub style={{marginRight: "5px", fontSize:"xx-large", color: "green"}}/></a>
-                        <a href="https://www.linkedin.com/in/juliettewoodrow" aria-label="LinkedIn Link"><FaLinkedin style={{marginRight: "5px", fontSize:"xx-large", color: "blue"}}/></a>                </div>
+                        <a href="https://www.linkedin.com/in/juliette-woodrow" aria-label="LinkedIn Link"><FaLinkedin style={{marginRight: "5px", fontSize:"xx-large", color: "blue"}}/></a>                </div>
                 </div>
                 <div style={imageStyle} onClick={setIsDungeon}>
-                <img src='trapdoor.jpg' alt="Trapdoor" style={{width: '100px'}}/>
+                <img src='trapdoor.jpg' alt="Trapdoor" style={{width: '20px'}}/>
             </div>
             </div>
   

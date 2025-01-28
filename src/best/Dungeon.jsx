@@ -72,7 +72,7 @@ export const Dungeon = ({setIsDungeon}) => {
 
 
     return <div className="dungeon">
-        <img src={DungeonInfo[direction]} alt="Dungeon"  width="100%" height={"100%"} />
+        <img src={DungeonInfo[direction]} alt="Dungeon"  width="100%" height="100%" />
        {DungeonPictures[direction].pic ?  <a href={DungeonPictures[direction].url}><img src={DungeonPictures[direction].pic} width="15%" alt="picture of someone"  style={{position: "absolute", top:DungeonPictures[direction].y, left:DungeonPictures[direction].x }} /></a> : null}
        <button onClick={goLeft} style={{position: "absolute", left: "20%", top: "50%" }}>Go Left</button>
         <button onClick={goRight} style={{position: "absolute", right: "20%", top: "50%" }}>Go Right</button>

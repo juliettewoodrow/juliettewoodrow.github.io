@@ -7,17 +7,24 @@ export const PaperList = () => {
         <div className="paper-list">
             <h1>Publications</h1>
             <Paper
-                authors={"J. Woodrow*, A. Malik, C. Piech"}
+                authors={"J. Woodrow, A. Malik, C. Piech"}
                 title={"AI Teaches the Art of Elegant Coding: Timely, Fair, and Helpful Style Feedback in a Global Course"}
                 conference={"SIGCSE 2024"}
                 award={""}
                 picUrl={"SFMainFigure.png"}
+                pdfUrl={"/pdfs/AITeachesElegantCoding.pdf"}
              />
+             <Paper
+                authors={"A. Malik*, J. Woodrow*, C. Wang, C. Piech"}
+                title={"TeachNow: Enabling Teachers to Provide Spontaneous, Realtime 1:1 Help in Massive Online Courses"}
+                conference={"ITiCSE 2024"}
+                picUrl={"overview_pic.jpg"}
+            />
             <Paper
                 authors={"A. Malik*, J. Woodrow*, B. Capoor, T. Jefferson, M. Li, S. Wang, P. Wei, D. Demszky, J. Langer-Osuna, J. Zelenski, M. Sahami, C. Piech"}
                 title={"Code in Place 2023: Understanding learning and teaching at scale through a massive global classroom"}
                 picUrl={"codeinplace_cookies.jpg"}
-                pdfUrl={'https://piechlab.stanford.edu/assets/papers/codeinplace2023.pdf'}
+                pdfUrl={'/pdfs/codeinplace2023.pdf'}
             />
             <Paper
                 authors={"A. Malik, J. Woodrow, C. Piech"}
@@ -25,6 +32,7 @@ export const PaperList = () => {
                 conference={"SIGCSE 2024"}
                 award={""}
                 picUrl={"avt.png"}
+                pdfUrl={"/pdfs/LearnersTeachingNovices.pdf"}
              />
 
             <Paper
@@ -33,6 +41,7 @@ export const PaperList = () => {
                 conference={"SIGCSE 2024"}
                 award={""}
                 picUrl={"breakout.png"}
+                pdfUrl={"/pdfs/BreakoutAutograder.pdf"}
              />
             
         </div>
