@@ -43,10 +43,10 @@ export const PaperList = () => {
                 picUrl={"codeinplace_cookies.jpg"}
                 pdfUrl={'/pdfs/codeinplace2023.pdf'}
             />
-            <Paper
+            {/* <Paper
                 authors={"A. Malik, J. Woodrow, C. Piech"}
                 title={"Learners Teaching Novices: An Uplifting Alternative Assessment"}
-                conference={"SIGCSE 2024"}
+                conference={"Proceedings of the 55th ACM Technical Symposium on Computer Science Education, Portland, USA. 2024"}
                 award={""}
                 picUrl={"avt.png"}
                 pdfUrl={"/pdfs/LearnersTeachingNovices.pdf"}
@@ -55,11 +55,11 @@ export const PaperList = () => {
             <Paper
                 authors={"E. Liu, D. Yuan, S. Ahmed, E. Cornwall, J. Woodrow, K. Burns, A. Nie, E. Brunskill, C. Piech, C. Finn"}
                 title={"A Fast and Accurate Machine Learning Autograder for the Breakout Assignment"}
-                conference={"SIGCSE 2024"}
+                conference={"Proceedings of the 55th ACM Technical Symposium on Computer Science Education, Portland, USA. 2024"}
                 award={""}
                 picUrl={"breakout.png"}
                 pdfUrl={"/pdfs/BreakoutAutograder.pdf"}
-             />
+             /> */}
             
         </div>
     )
