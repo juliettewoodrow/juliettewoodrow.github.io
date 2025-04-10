@@ -7,9 +7,17 @@ export const PaperList = () => {
         <div className="paper-list">
             <h1>Publications</h1>
             <Paper
+                authors={"J. Woodrow, S. Koyejo, C. Piech"}
+                title={"Improving Generative AI Student Feedback: Direct Preference Optimization with Teachers in the Loop"}
+                conference={"Proceedings of the 18th International Conference on Educational Data Mining. 2025."}
+                award={""}
+                picUrl={"dpofeedback_mainfigure.png"}
+                pdfUrl={"/pdfs/DPOFeedback.pdf"}
+             />
+            <Paper
                 authors={"J. Woodrow, C. Piech"}
                 title={"Soft Grades: A Calibrated and Accurate Method for Course-Grade Estimation that Expresses Uncertainty"}
-                conference={"LAK 2025"}
+                conference={"Proceedings of the 15th International Learning Analytics and Knowledge Conference. 2025"}
                 award={""}
                 picUrl={"softgradesfigure.png"}
                 pdfUrl={"/pdfs/SoftGrades.pdf"}
@@ -17,7 +25,7 @@ export const PaperList = () => {
             <Paper
                 authors={"J. Woodrow, A. Malik, C. Piech"}
                 title={"AI Teaches the Art of Elegant Coding: Timely, Fair, and Helpful Style Feedback in a Global Course"}
-                conference={"SIGCSE 2024"}
+                conference={"Proceedings of the 55th ACM Technical Symposium on Computer Science Education, Portland, USA. 2024"}
                 award={""}
                 picUrl={"SFMainFigure.png"}
                 pdfUrl={"/pdfs/AITeachesElegantCoding.pdf"}
@@ -25,7 +33,7 @@ export const PaperList = () => {
              <Paper
                 authors={"A. Malik*, J. Woodrow*, C. Wang, C. Piech"}
                 title={"TeachNow: Enabling Teachers to Provide Spontaneous, Realtime 1:1 Help in Massive Online Courses"}
-                conference={"ITiCSE 2024"}
+                conference={"Proceedings of the 2024 on Innovation and Technology in Computer Science Education"}
                 picUrl={"overview_pic.jpg"}
                 pdfUrl={"/pdfs/TeachNow.pdf"}
             />
