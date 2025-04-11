@@ -5,7 +5,7 @@ export const PaperList = () => {
 
     return (
         <div className="paper-list">
-            <h1>Publications</h1>
+            <h1>Recent Publications</h1>
             <Paper
                 authors={"J. Woodrow, S. Koyejo, C. Piech"}
                 title={"Improving Generative AI Student Feedback: Direct Preference Optimization with Teachers in the Loop"}
