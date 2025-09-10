@@ -2,6 +2,7 @@ import { Header } from "../components/Header"
 import { About } from "../components/About"
 import { Teaching } from "../components/Teaching"
 import { PaperList } from "../components/PaperList"
+import { Awards } from "../components/Awards"
 
 export const Home = ({setIsDungeon}) => {
 
@@ -12,6 +13,8 @@ export const Home = ({setIsDungeon}) => {
         <About/>
         <hr/>
         <Teaching/>
+        <hr/>
+        <Awards/>
         <hr/>
         <PaperList/>
 

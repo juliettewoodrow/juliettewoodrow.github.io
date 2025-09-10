@@ -31,7 +31,7 @@ export const Header = ({setIsDungeon}) => {
             <div style={containerStyle}>
                 <div style={textStyle}>
                     <h1 style={{marginBottom: "5px"}}>Juliette Woodrow</h1>
-                    <h2 style={headerStyle}>Ph.D Student at Stanford University</h2>
+                    <h2 style={headerStyle}>Ph.D Candidate at Stanford University</h2>
                     <h3 style={headerStyle}><span>jwoodrow</span><span>@stanford.edu</span></h3>
                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px" }}>
                         {/* X (Twitter) Logo in a Black Rounded Square */}
