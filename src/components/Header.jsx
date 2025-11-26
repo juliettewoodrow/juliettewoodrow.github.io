@@ -27,7 +27,7 @@ export const Header = ({setIsDungeon}) => {
 
     return (
         <div style={{ display: "flex", flexWrap: "wrap", position: "relative" }}>
-            <Face imageUrl="juliette.JPG" toggleIsVisible={toggleVisibility}/>
+            <Face imageUrl="juliette.jpg" toggleIsVisible={toggleVisibility}/>
             <div style={containerStyle}>
                 <div style={textStyle}>
                     <h1 style={{marginBottom: "5px"}}>Juliette Woodrow</h1>
