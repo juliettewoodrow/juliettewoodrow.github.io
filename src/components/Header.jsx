@@ -1,70 +1,57 @@
 import { Face } from "./Face"
-import { FaGithub, FaLinkedin, FaEnvelope, FaTwitter } from "react-icons/fa"
-import { useState } from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { useState } from "react"
 
-
-export const Header = ({setIsDungeon}) => {
-    const [isVisible, setIsVisible] = useState(true); // Tracks visibility
+export const Header = ({ setIsDungeon }) => {
+    const [isVisible, setIsVisible] = useState(true)
 
     const toggleVisibility = () => {
-        setIsVisible(!isVisible);
-    };
-    const headerStyle = {marginBottom: "2px", marginTop: "2px"}
-
-    const containerStyle = { display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "left" }
-
+        setIsVisible(!isVisible)
+    }
 
     const textStyle = {
         transition: "opacity 0.5s ease",
         opacity: isVisible ? 1 : 0,
-    };
+    }
 
-    const imageStyle = {
+    const trapdoorStyle = {
         transition: "opacity 0.5s ease",
         opacity: !isVisible ? 1 : 0,
-        position: 'absolute',
-    };
+        position: "absolute",
+        cursor: "pointer",
+    }
 
     return (
-        <div style={{ display: "flex", flexWrap: "wrap", position: "relative" }}>
-            <Face imageUrl="juliette.jpg" toggleIsVisible={toggleVisibility}/>
-            <div style={containerStyle}>
+        <div className="header">
+            <Face imageUrl="juliette.jpg" toggleIsVisible={toggleVisibility} />
+            <div className="header-info">
                 <div style={textStyle}>
-                    <h1 style={{marginBottom: "5px"}}>Juliette Woodrow</h1>
-                    <h2 style={headerStyle}>Ph.D Candidate at Stanford University</h2>
-                    <h3 style={headerStyle}><span>jwoodrow</span><span>@stanford.edu</span></h3>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px" }}>
-                        {/* X (Twitter) Logo in a Black Rounded Square */}
-                        <a href="https://twitter.com/juliettewoodrow" aria-label="Twitter Link" style={{ textDecoration: "none" }}>
-                            <div style={{ 
-                                backgroundColor: "black", 
-                                color: "white", 
-                                width: "30px", 
-                                height: "30px", 
-                                display: "flex", 
-                                alignItems: "center", 
-                                justifyContent: "center", 
-                                borderRadius: "3px" ,
-                                marginBottom: "5px",
-                                marginRight: "7px"
-                            }}>
-                                <span style={{ fontSize: "24px", fontWeight: "bold" }}>𝕏</span>
-                            </div>
+                    <h1 className="header-name">Juliette Woodrow</h1>
+                    <p className="header-title">PhD Candidate in Computer Science, Stanford University</p>
+                    <p className="header-tagline">Building interpretable and useful AI systems for education</p>
+                    <p className="header-email">jwoodrow@stanford.edu</p>
+                    <div className="social-links">
+                        <a href="https://twitter.com/juliettewoodrow" aria-label="X (Twitter)">
+                            <span className="social-icon" style={{ fontWeight: "bold", fontSize: "1.1rem" }}>𝕏</span>
                         </a>
-                        <a href="https://github.com/juliettewoodrow" aria-label="Github Link" ><FaGithub style={{marginRight: "5px", fontSize:"xx-large", color: "green"}}/></a>
-                        <a href="https://www.linkedin.com/in/juliette-woodrow" aria-label="LinkedIn Link"><FaLinkedin style={{marginRight: "5px", fontSize:"xx-large", color: "blue"}}/></a>                
-                        {/* Bluesky Logo (From image) */}
-                        <a href="https://bsky.app/profile/juliettewoodrow.bsky.social" aria-label="Bluesky Link">
-                            <img src="blueskylogo_1.png" alt="Bluesky Logo" style={{ width: "32px", height: "32px", borderRadius: "3px" }} />
+                        <a href="https://github.com/juliettewoodrow" aria-label="GitHub">
+                            <FaGithub className="social-icon" />
+                        </a>
+                        <a href="https://www.linkedin.com/in/juliette-woodrow" aria-label="LinkedIn">
+                            <FaLinkedin className="social-icon" />
+                        </a>
+                        <a href="https://bsky.app/profile/juliettewoodrow.bsky.social" aria-label="Bluesky">
+                            <img src="blueskylogo_1.png" alt="Bluesky" style={{ width: "20px", height: "20px", opacity: 0.6 }} />
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=NsCBeoEAAAAJ&hl=en" aria-label="Google Scholar" className="scholar-icon">
+                            Scholar
                         </a>
                     </div>
-                    </div>
-                <div style={imageStyle} onClick={setIsDungeon}>
-                <img src='trapdoor.jpg' alt="Trapdoor" style={{width: '20px'}}/>
+                </div>
+                <div style={trapdoorStyle} onClick={setIsDungeon}>
+                    <img src="trapdoor.jpg" alt="Trapdoor" style={{ width: "20px" }} />
+                </div>
             </div>
-            </div>
-  
         </div>
     )
-
 }

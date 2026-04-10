@@ -1,15 +1,24 @@
 export const Teaching = () => {
     return (
-        <div className="teaching">
-            <h1>Teaching</h1>
-            <ul>
-                <li>Lecturer for <a href="https://web.stanford.edu/class/cs109/">CS109: Probability for Computer Scientists</a> (Winter 2026)  </li>
-                <li>Head TA for <a href="https://web.stanford.edu/class/cs109/">CS109: Probability for Computer Scientists</a> (Fall 2025)</li>
-                <li>TA for <a href="https://web.stanford.edu/class/cs109/">CS109: Probability for Computer Scientists</a> (Fall 2023)</li>
-                <li>Lecturer for <a href="https://web.stanford.edu/class/cs106a-8/">CS106A: Programming Methodologies</a> (Summer 2021)</li>
-                <li>Head TA for CS106A: Programming Methodologies (Fall 2020 – Spring 2022)</li>
-                <li>Serve on the core team for <a href="https://codeinplace.stanford.edu/">Code in Place (2020 - Present)</a></li>
-            </ul>
+        <div className="section">
+            <h2 className="section-title">Teaching</h2>
+            <div className="teaching-grid">
+                <a href="https://web.stanford.edu/class/archive/cs/cs109/cs109.1264/" className="teaching-card">
+                    <h3>CS109</h3>
+                    <p className="teaching-card-name">Probability for Computer Scientists</p>
+                    <p className="teaching-card-role">Lecturer, Winter 2026</p>
+                </a>
+                <a href="https://web.stanford.edu/class/cs106a-8/" className="teaching-card">
+                    <h3>CS106A</h3>
+                    <p className="teaching-card-name">Programming Methodologies</p>
+                    <p className="teaching-card-role">Lecturer, Summer 2021</p>
+                </a>
+                <a href="https://codeinplace.stanford.edu/" className="teaching-card">
+                    <h3>Code in Place</h3>
+                    <p className="teaching-card-name">Global Intro to CS</p>
+                    <p className="teaching-card-role">Core Team, 2020 – Present</p>
+                </a>
+            </div>
         </div>
     )
 }
