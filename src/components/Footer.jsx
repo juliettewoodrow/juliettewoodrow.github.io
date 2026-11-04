@@ -1,4 +1,5 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { Email } from "./Email"
 
 export const Footer = () => {
     return (
@@ -17,7 +18,7 @@ export const Footer = () => {
                     <img src="blueskylogo_1.png" alt="Bluesky" style={{ width: "18px", height: "18px", opacity: 0.5 }} />
                 </a>
             </div>
-            <p>jwoodrow@stanford.edu</p>
+            <p><Email /></p>
         </footer>
     )
 }

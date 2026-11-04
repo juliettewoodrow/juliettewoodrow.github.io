@@ -3,8 +3,20 @@ import { Paper } from "./Paper"
 export const PaperList = () => {
     return (
         <div className="section">
-            <h2 className="section-title">Selected Publications</h2>
+            <div className="publication-header">
+                <h2 className="section-title">Selected Publications</h2>
+                <a className="scholar-link" href="https://scholar.google.com/citations?user=NsCBeoEAAAAJ&hl=en">
+                    View all publications on Google Scholar &rarr;
+                </a>
+            </div>
             <div className="paper-list">
+                <Paper
+                    authors="J. Woodrow, C. Piech"
+                    title="PromptNCE: Conditional Probabilities and PMI Using Only LLMs and Contrastive Estimation Prompts"
+                    conference="Proceedings of the Conference on Language Modeling (COLM), 2026."
+                    picUrl="promptncefigure.png"
+                    pdfUrl="https://arxiv.org/abs/2605.21776"
+                />
                 <Paper
                     authors="J. Woodrow, S. Koyejo, C. Piech"
                     title="Improving Generative AI Student Feedback: Direct Preference Optimization with Teachers in the Loop"
@@ -41,9 +53,6 @@ export const PaperList = () => {
                     pdfUrl="/pdfs/codeinplace2023.pdf"
                 />
             </div>
-            <p className="scholar-link">
-                <a href="https://scholar.google.com/citations?user=NsCBeoEAAAAJ&hl=en">View all publications on Google Scholar &rarr;</a>
-            </p>
         </div>
     )
 }
