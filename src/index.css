@@ -552,6 +552,15 @@ html {
 }
 
 .nb-code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  border: 0;
+  cursor: pointer;
   margin: 0;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.95rem;
@@ -585,6 +594,12 @@ html {
   margin-top: 0.35rem;
   font-weight: 600;
   font-size: 1.05rem;
+}
+
+.nb-card-subtitle {
+  margin-top: 0.1rem;
+  font-size: 0.9rem;
+  color: #3d3d3d;
 }
 
 .nb-card-desc {
@@ -749,7 +764,6 @@ a.nb-paper-title:hover {
   border-top: 1px solid #e6e3dc;
   font-size: 0.85rem;
   color: #6b6b6b;
-  padding-bottom: 30vh;
 }
 
 @media (max-width: 700px) {
@@ -762,7 +776,26 @@ a.nb-paper-title:hover {
     display: none;
   }
 
-  .nb-footer {
-    padding-bottom: 2rem;
-  }
+}
+
+.nb-code:hover {
+  background: #ebe8e0;
+}
+
+.nb-caret {
+  color: #9a9a9a;
+  font-size: 0.85rem;
+}
+
+.nb-papers-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+
+.nb-equal {
+  font-size: 0.8rem;
+  color: #6b6b6b;
 }
