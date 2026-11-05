@@ -1,0 +1,456 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* Local-only "probability" design experiment (see App.jsx). */
+
+.pb-page {
+  background: #fdfdfb;
+  --pb-blue: #2b4acb;
+  --pb-pink: #c2185b;
+}
+
+.pb-page a {
+  color: var(--pb-blue);
+}
+
+.pb-page a:hover {
+  color: #1a2f8f;
+}
+
+.pb-wrap {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.pb-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.pb-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.pb-hero-text {
+  flex: 999 1 520px;
+  min-width: 0;
+}
+
+.pb-curves {
+  flex: 1 1 260px;
+  max-width: 320px;
+}
+
+.pb-equation {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 1.9rem;
+  line-height: 1.4;
+}
+
+.pb-gt {
+  color: var(--pb-blue);
+}
+
+.pb-q {
+  color: var(--pb-pink);
+}
+
+.pb-lead {
+  margin-top: 1.25rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.pb-lead-secondary {
+  margin-top: 0.85rem;
+  color: #333;
+}
+
+.pb-news {
+  margin-top: 3rem;
+  padding: 1.75rem 2rem;
+  border: 1px dashed var(--pb-pink);
+  border-radius: 4px;
+  background: #fff7fa;
+}
+
+.pb-kicker {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: var(--pb-pink);
+  margin-bottom: 0.75rem;
+}
+
+.pb-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.pb-news-row {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.pb-news-when {
+  font-size: 0.78rem;
+  color: #5c5c5c;
+  padding-top: 0.2rem;
+}
+
+.pb-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 3.5rem;
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid #1c1c1c;
+}
+
+.pb-h2 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.pb-h2-awards {
+  margin-top: 2.25rem;
+  font-size: 1.15rem;
+}
+
+.pb-papers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.pb-venue {
+  font-size: 0.8rem;
+  color: #5c5c5c;
+}
+
+.pb-paper-title {
+  font-weight: 500;
+}
+
+.pb-paper-title-plain {
+  color: #1c1c1c;
+}
+
+.pb-paper-result {
+  margin-top: 0.15rem;
+  color: #333;
+  font-size: 1rem;
+}
+
+.pb-authors {
+  color: #5c5c5c;
+  font-size: 0.95rem;
+}
+
+.pb-papers-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.pb-equal,
+.pb-small {
+  font-size: 0.85rem;
+  color: #5c5c5c;
+}
+
+.pb-teaching,
+.pb-awards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pb-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e7e7e2;
+  font-size: 0.85rem;
+  color: #5c5c5c;
+}
+
+/* Teaching, full width */
+.pb-teaching-section {
+  margin-top: 3.5rem;
+}
+
+.pb-course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.pb-course {
+  padding: 1.4rem 1.5rem;
+  background: #fff;
+  border: 1px solid #e7e7e2;
+  border-radius: 4px;
+}
+
+.pb-course-when {
+  font-size: 0.78rem;
+  color: #5c5c5c;
+}
+
+.pb-course-name {
+  margin-top: 0.4rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.pb-course-subtitle {
+  margin-top: 0.15rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.92rem;
+  color: #3d3d3d;
+}
+
+.pb-course-desc {
+  margin-top: 0.5rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #333;
+}
+
+/* Header sizes on this version */
+.pb-page .nb-name {
+  font-size: 2.9rem;
+}
+
+.pb-page .nb-title {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.pb-page .nb-primary-links {
+  font-size: 1.1rem;
+  margin-top: 0.9rem;
+}
+
+.pb-page .nb-email {
+  font-size: 0.95rem;
+}
+
+.pb-page .nb-links {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.pb-page .nb-header-info {
+  padding-top: 2rem;
+}
+
+/* News layouts */
+.pb-kicker-gray {
+  color: #5c5c5c;
+}
+
+.pb-now-title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.pb-now-text {
+  margin-top: 0.6rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #333;
+}
+
+.pb-news-a,
+.pb-news-d {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  align-items: stretch;
+}
+
+.pb-news-a {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+}
+
+.pb-news-d {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.pb-news-a .pb-news,
+.pb-news-d .pb-news {
+  margin-top: 0;
+}
+
+.pb-news-side {
+  padding: 1.75rem 0.25rem 0;
+}
+
+.pb-recent-card {
+  padding: 1.75rem 2rem;
+  border: 1px solid #e7e7e2;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.pb-news-stacked .pb-news-row {
+  grid-template-columns: 1fr;
+  gap: 0.1rem;
+}
+
+.pb-news-stacked {
+  gap: 0.9rem;
+  font-size: 0.95rem;
+}
+
+.pb-obs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.pb-obs-row {
+  display: grid;
+  grid-template-columns: 36px 100px minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.pb-obs-var {
+  color: var(--pb-pink);
+  font-size: 0.85rem;
+  padding-top: 0.1rem;
+}
+
+.pb-obs-foot {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: #5c5c5c;
+}
+
+.pb-nowline {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  margin-top: 2.25rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid #1c1c1c;
+  border-bottom: 1px solid #1c1c1c;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1rem;
+}
+
+.pb-nowline-label {
+  color: var(--pb-pink);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pb-aside-news {
+  margin-bottom: 2.25rem;
+}
+
+.pb-switcher {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background: #1c1c1c;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.pb-switch {
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 999px;
+  border: 1px solid #555;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.pb-switch-on {
+  background: #fff;
+  color: #1c1c1c;
+}
+
+.pb-switch-label {
+  margin-left: 0.25rem;
+  color: #ccc;
+}
+
+@media (max-width: 760px) {
+  .pb-news-a,
+  .pb-news-d {
+    grid-template-columns: 1fr;
+  }
+
+  .pb-obs-row {
+    grid-template-columns: 30px 1fr;
+  }
+
+  .pb-obs-row > span:last-child {
+    grid-column: 2;
+  }
+
+  .pb-switch-label {
+    display: none;
+  }
+
+  .pb-course-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pb-columns {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .pb-news {
+    padding: 1.25rem;
+  }
+
+  .pb-news-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .pb-equation {
+    font-size: 1.4rem;
+  }
+}

@@ -1,20 +1,36 @@
 import { useEffect, useState } from "react"
 import { Email } from "./Email"
 
-const Cell = ({ id, n, code, children }) => (
-    <section className="nb-cell" id={id}>
-        <div className="nb-row">
-            <span className="nb-prompt nb-prompt-in">In [{n}]:</span>
-            <pre className="nb-code">{code}</pre>
-        </div>
-        <div className="nb-row nb-row-out">
-            <span className="nb-prompt" aria-hidden="true"></span>
-            <div className="nb-out">{children}</div>
-        </div>
-    </section>
-)
+const Cell = ({ id, n, code, children }) => {
+    const [open, setOpen] = useState(true)
+    const outId = id + "-output"
 
-const news = [
+    return (
+        <section className="nb-cell" id={id}>
+            <div className="nb-row">
+                <span className="nb-prompt nb-prompt-in">In [{n}]:</span>
+                <button
+                    type="button"
+                    className="nb-code"
+                    onClick={() => setOpen(!open)}
+                    aria-expanded={open}
+                    aria-controls={outId}
+                >
+                    <span>{code}</span>
+                    <span className="nb-caret" aria-hidden="true">{open ? "▾" : "▸"}</span>
+                </button>
+            </div>
+            {open && (
+                <div className="nb-row nb-row-out" id={outId}>
+                    <span className="nb-prompt" aria-hidden="true">Out[{n}]:</span>
+                    <div className="nb-out">{children}</div>
+                </div>
+            )}
+        </section>
+    )
+}
+
+export const news = [
     {
         when: "Fall 2026",
         text: (
@@ -28,7 +44,7 @@ const news = [
         when: "2026",
         text: (
             <>
-                <a href="https://arxiv.org/abs/2605.21776">PromptNCE</a> accepted at COLM 2026.
+                <a href="https://arxiv.org/abs/2605.21776">PromptNCE</a> published at COLM 2026.
             </>
         ),
     },
@@ -36,13 +52,21 @@ const news = [
         when: "Winter 2026",
         text: (
             <>
-                Instructor of record for <a href="https://web.stanford.edu/class/archive/cs/cs109/cs109.1264/">CS109</a>, Stanford's probability course.
+                Taught Stanford's <a href="https://web.stanford.edu/class/archive/cs/cs109/cs109.1264/">CS109</a>, a course teaching probability through the lens of computer science.
+            </>
+        ),
+    },
+    {
+        when: "Dec 2025",
+        text: (
+            <>
+                Featured in a <a href="https://engineering.stanford.edu/spotlight/juliette-woodrow">Stanford Engineering spotlight</a>.
             </>
         ),
     },
 ]
 
-const papers = [
+export const papers = [
     {
         title: "PromptNCE: Conditional Probabilities and PMI Using Only LLMs and Contrastive Estimation Prompts",
         url: "https://arxiv.org/abs/2605.21776",
@@ -56,9 +80,15 @@ const papers = [
         meta: "J. Woodrow, Z. Zhu, C. Piech. Under review",
     },
     {
+        title: "Surprising Effectiveness of Students Teaching Classmates: Lessons from 1,300+ Peer-Teaching Sessions",
+        url: null,
+        result: "1,358 sessions taught by 355 peer teachers across 118 countries.",
+        meta: "J. Woodrow, C. Piech. Under review",
+    },
+    {
         title: "Improving Generative AI Student Feedback: Direct Preference Optimization with Teachers in the Loop",
         url: "/pdfs/DPOFeedback.pdf",
-        result: "Fine-tunes on teachers' grading choices; experts preferred it over GPT-4o, 56.8% to 40.2%.",
+        result: "Fine-tunes on teachers' grading choices; experts preferred it over GPT-4o.",
         meta: "J. Woodrow, S. Koyejo, C. Piech. EDM 2025",
     },
     {
@@ -75,10 +105,11 @@ const papers = [
     },
 ]
 
-const courses = [
+export const courses = [
     {
         when: "Fall 2026 · co-instructor",
         name: "Code in Place X",
+        subtitle: "Stanford University",
         url: "https://codeinplace.stanford.edu/cipx/intro",
         desc: (
             <>
@@ -89,24 +120,27 @@ const courses = [
     {
         when: "Winter 2026 · instructor of record",
         name: "CS109 Probability for Computer Scientists",
+        subtitle: "Stanford University",
         url: "https://web.stanford.edu/class/archive/cs/cs109/cs109.1264/",
         desc: "270+ students. Probability through computation, from MLE to information theory and diffusion models.",
     },
     {
         when: "Summer 2021 · instructor",
         name: "CS106A Programming Methodologies",
+        subtitle: "Stanford University",
         url: "https://web.stanford.edu/class/cs106a-8/",
         desc: "Stanford's introductory programming course.",
     },
     {
         when: "2020 to present · founding team",
         name: "Code in Place",
+        subtitle: "Stanford University",
         url: "https://codeinplace.stanford.edu/",
         desc: "Stanford's free, global intro CS course, with 60,000+ learners and 5,000+ volunteer teachers.",
     },
 ]
 
-const awards = [
+export const awards = [
     { name: "Stanford HAI Graduate Fellowship", url: null, year: null },
     {
         name: "Walter J. Gores Award for Excellence in Teaching",
@@ -128,7 +162,7 @@ const sections = [
 ]
 
 const NewsCell = () => (
-    <Cell id="news" n={1} code="juliette.news()">
+    <Cell id="news" n={1} code="juliette.latest_news()">
         <div className="nb-news">
             {news.map((item) => (
                 <div className="nb-news-row" key={item.when}>
@@ -140,10 +174,10 @@ const NewsCell = () => (
     </Cell>
 )
 
-const ResearchCell = () => (
+const ResearchCell = ({ list = papers }) => (
     <Cell id="research" n={2} code="juliette.research()">
         <div className="nb-list nb-papers">
-            {papers.map((p) => (
+            {list.map((p) => (
                 <div key={p.title} className="nb-paper">
                     {p.url ? (
                         <a className="nb-paper-title" href={p.url}>{p.title}</a>
@@ -154,9 +188,12 @@ const ResearchCell = () => (
                     <p className="nb-meta">{p.meta}</p>
                 </div>
             ))}
-            <a className="nb-mono nb-more" href="https://scholar.google.com/citations?user=NsCBeoEAAAAJ&hl=en">
-                ... more on Google Scholar
-            </a>
+            <div className="nb-papers-footer">
+                <a className="nb-mono nb-more" href="https://scholar.google.com/citations?user=NsCBeoEAAAAJ&hl=en">
+                    ... more on Google Scholar
+                </a>
+                <span className="nb-equal">* denotes equal contribution</span>
+            </div>
         </div>
     </Cell>
 )
@@ -168,6 +205,7 @@ const TeachingCell = () => (
                 <div className="nb-card" key={c.name}>
                     <p className="nb-card-when">{c.when}</p>
                     <p className="nb-card-name"><a href={c.url}>{c.name}</a></p>
+                    {c.subtitle && <p className="nb-card-subtitle">{c.subtitle}</p>}
                     <p className="nb-card-desc">{c.desc}</p>
                 </div>
             ))}
@@ -188,10 +226,16 @@ const AwardsCell = () => (
     </Cell>
 )
 
-export const Notebook = () => (
+const underReviewFirst = (list) =>
+    [...list].sort((x, y) => (x.meta.endsWith("Under review") ? 0 : 1) - (y.meta.endsWith("Under review") ? 0 : 1))
+
+export { Cell }
+
+export const Notebook = ({ intro = null, reviewFirst = false }) => (
     <div className="nb-cells">
+        {intro}
         <NewsCell />
-        <ResearchCell />
+        <ResearchCell list={reviewFirst ? underReviewFirst(papers) : papers} />
         <TeachingCell />
         <AwardsCell />
         <footer className="nb-footer">

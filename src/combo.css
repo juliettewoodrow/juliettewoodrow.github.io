@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* Local-only "combo" design experiment (see App.jsx):
+   notebook structure from the main site, typography from the probability version. */
+
+.cb-page {
+  --cb-serif: 'Libre Baskerville', Georgia, serif;
+  --cb-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* Monospace pieces */
+.cb-page .nb-mono,
+.cb-page .nb-code,
+.cb-page .nb-prompt,
+.cb-page .nb-card-when,
+.cb-page .nb-news-when,
+.cb-page .nb-side-link,
+.cb-page .nb-more,
+.cb-page .nb-year {
+  font-family: var(--cb-mono);
+}
+
+/* Serif pieces */
+.cb-page .nb-name,
+.cb-page .nb-bio,
+.cb-page .nb-news,
+.cb-page .nb-card-desc,
+.cb-page .nb-paper-result,
+.cb-page .cb-question-text {
+  font-family: var(--cb-serif);
+}
+
+/* Header sizes */
+.cb-page .nb-name {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cb-page .nb-title {
+  font-size: 1.15rem;
+  margin-top: 0.5rem;
+}
+
+.cb-page .nb-primary-links {
+  font-size: 1.08rem;
+  margin-top: 0.85rem;
+}
+
+.cb-page .nb-email {
+  font-size: 0.9rem;
+}
+
+.cb-page .nb-links {
+  font-size: 0.98rem;
+  margin-top: 0.45rem;
+}
+
+.cb-page .nb-header-info {
+  padding-top: 1.75rem;
+}
+
+.cb-page .nb-bio {
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+/* Papers a bit larger */
+.cb-page .nb-papers {
+  font-size: 1.05rem;
+}
+
+.cb-page .nb-paper-result {
+  font-size: 0.95rem;
+}
+
+.cb-page .nb-paper .nb-meta {
+  font-size: 0.9rem;
+}
+
+/* News reads as a small timeline */
+.cb-page .nb-news {
+  font-size: 0.98rem;
+}
+
+/* Question cell */
+.cb-question {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cb-curves {
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+.cb-question-text {
+  flex: 1 1 240px;
+  color: #3d3d3d;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.cb-page .nb-title a {
+  white-space: nowrap;
+}
