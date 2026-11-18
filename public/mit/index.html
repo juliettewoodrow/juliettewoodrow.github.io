@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <title>Juliette Woodrow · Lectures at MIT</title>
-  <meta name="description" content="Slides and bonus material for Juliette Woodrow's two guest lectures at MIT: linear regression (with a map hidden inside GPT-2) and a tour inside a large language model." />
+  <meta name="description" content="Slides and reading for Juliette Woodrow's two guest lectures at MIT: linear regression (with a map hidden inside GPT-2) and a tour inside a large language model." />
   <meta property="og:title" content="Juliette Woodrow · Lectures at MIT" />
-  <meta property="og:description" content="Slides and bonus material: linear regression, and inside a large language model." />
+  <meta property="og:description" content="Slides and reading: linear regression, and inside a large language model." />
   <meta property="og:image" content="https://juliettewoodrow.github.io/juliette_square.jpg" />
   <meta property="og:url" content="https://juliettewoodrow.github.io/mit/" />
   <meta property="og:type" content="website" />
@@ -132,8 +132,7 @@
             <a href="https://codeinplace.stanford.edu/">Code in Place</a>, a free global programming course.
           </p>
           <p class="bio">
-            This page collects everything from today's lectures: the slides, the data, and a set of bonus slides for anyone
-            who wants to go further. My full website, papers and CV are at
+            This page collects everything from today's lectures: the slides, a few bonus slides, and some further reading. My full website, papers and CV are at
             <a href="/">juliettewoodrow.github.io</a>.
           </p>
           <p class="links">
@@ -211,134 +210,45 @@
             <span class="prompt" aria-hidden="true">Out[2]:</span>
             <div class="out">
               <p class="intro">
-                Twenty-five minutes is not long. These are the slides I built and set aside: the questions people usually ask,
-                the derivations in full, and a few more experiments. They are collected in one deck, in nine short sections.
-                Each section below says what it covers and where to find it.
+                Twenty-five minutes is not long. A few things I set aside, in one short deck of 23 slides:
               </p>
-              <div class="card-actions" style="padding-top:0; margin-bottom: 1rem;">
-                <a class="btn" href="https://pai.stanford.edu/pai1/share/slides/zHnH9MDqZ4ZFFGkHCer0vS6J">Open the bonus deck (59 slides) ↗</a>
+              <div class="list">
+                <div><strong>Why not just ask GPT-2 where a city is?</strong> We did. It writes "about 1,000 miles from" and never gives a coordinate.
+                  What a model says is not the same as what it represents. <span class="meta">slides 1 to 3</span></div>
+                <div><strong>More cities through the probe.</strong> Tehran lands 70 km off. New York lands in the Atlantic. Cambridge, Massachusetts
+                  lands in Kansas: GPT-2 small does not know where MIT is. Then the debate: is a map in there, or is this parroting? <span class="meta">slides 4 to 11</span></div>
+                <div><strong>Reading R² honestly.</strong> R² = 0.75 does not mean 75% of trips were predicted correctly. Plus RMSE and MAE in minutes,
+                  and why the honest score is on held-out data. <span class="meta">slides 12 to 17</span></div>
+                <div><strong>The airport puzzle.</strong> Airport trips average 35 minutes, yet the airport feature gets a negative coefficient. Because the
+                  model already knows the distance, and given the distance, airport trips are faster. A coefficient is the effect of a feature holding the
+                  others fixed. <span class="meta">slides 18 to 20</span></div>
+                <div><strong>Bigger models, better maps.</strong> The same recipe on Llama 3.1 (8 billion parameters) gives a mean R² of 0.93 against 0.63 for
+                  GPT-2 small. Nobody asked either model to build a map. <span class="meta">slides 21 to 23</span></div>
               </div>
+              <div class="card-actions" style="padding-top:1rem;">
+                <a class="btn" href="https://pai.stanford.edu/pai1/share/slides/zHnH9MDqZ4ZFFGkHCer0vS6J">Open the bonus deck ↗</a>
+              </div>
+            </div>
+          </div>
+        </section>
 
-              <div class="bonus">
-                <details>
-                  <summary><span>1. Why not just ask GPT-2 where a city is?</span><span class="slides">slides 1 to 3</span></summary>
-                  <div class="bonus-body">
-                    <p class="q">If we want to know whether GPT-2 knows where Cambridge is, why not ask it?</p>
-                    <p>We did. Prompted with "The latitude and longitude of Cambridge, Massachusetts is", GPT-2 small writes
-                    "about 1,000 miles (1,200 km) from" and never produces a coordinate. What a model is willing to <em>say</em>
-                    is not the same as what it <em>represents</em>. So the experiment asks a different question: when the model
-                    merely reads a city's name, is its location recoverable from the numbers inside, even though nobody asked?</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>2. More cities through the probe</span><span class="slides">slides 4 to 11</span></summary>
-                  <div class="bonus-body">
-                    <p>In the lecture we tried Chicago. Here the same two regression models (one for latitude, one for longitude)
-                    get New York City, Oslo, Reykjavík, Tehran and Cambridge, Massachusetts, none of which were used to fit the
-                    coefficients. Tehran lands 70 km off. New York lands in the Atlantic, 880 km off. Cambridge lands in Kansas,
-                    2,230 km off: GPT-2 small does not know where MIT is.</p>
-                    <p>The section ends with the debate these results feed: is a map "in there", or is this parroting? Being able
-                    to decode a quantity with a straight line shows the information is present. It does not show the model uses it.</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>3. Why the squared vertical error?</span><span class="slides">slides 12 to 15</span></summary>
-                  <div class="bonus-body">
-                    <p class="q">Why square the errors instead of adding them? Why measure vertically and not perpendicular to the line?</p>
-                    <p>Adding signed errors over all 1,154,203 training trips gives exactly zero for the line through the mean:
-                    plus 3.18 million minutes above, minus 3.18 million below. The sum measures the balance of over- and
-                    under-prediction, not closeness. Squaring stops the cancellation and weights a 10-minute miss 25 times more
-                    than a 2-minute miss. Absolute error is a valid alternative (it gives a median-style fit). Squared error is
-                    also the maximum-likelihood choice when the noise around the line is Gaussian.</p>
-                    <p>Vertical, because the task is to predict a duration <em>given</em> a distance. The vertical gap is the
-                    number of minutes our prediction missed by. Perpendicular distance (total least squares) answers a different
-                    question, useful when both coordinates are measured with error.</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>4. From maximum likelihood to gradient descent</span><span class="slides">slides 16 to 20</span></summary>
-                  <div class="bonus-body">
-                    <p>The review I cut for time. Maximum likelihood picks the parameters that make the data most likely. With one
-                    parameter (seven heads in ten flips) you can find the top of the log-likelihood by gradient <em>ascent</em>:
-                    find the slope, step uphill, repeat, and stop at p = 0.7. Machine learning usually has a loss we want
-                    small instead, so we flip the sign and descend. Gradient descent is the same one move, downhill.</p>
-                    <p>The last slide is the picture I like best: climbing a real mountain in the fog (the Island of Hawai'i, from
-                    a real elevation model) when all you can read is the altimeter under your feet.</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>5. The derivation, step by step</span><span class="slides">slides 21 to 30</span></summary>
-                  <div class="bonus-body">
-                    <p>Everything the lecture compressed into two slides. The goal: find β₀, β₁ that minimise
-                    L(β₀, β₁) = (1/n) Σ [yᵢ − (β₀ + β₁xᵢ)]². At the lowest point of the loss surface both slopes are zero.
-                    Step one, the chain rule applied to one trip and then summed, gives
-                    ∂L/∂β₀ = −(2/n) Σ (yᵢ − ŷᵢ) and ∂L/∂β₁ = −(2/n) Σ xᵢ(yᵢ − ŷᵢ). Step two, two ways: walk downhill, or
-                    set both to zero and solve.</p>
-                    <p>Solving: the first equation gives β₀ = ȳ − β₁x̄ (so the fitted line passes through the point of means).
-                    Substituting into the second gives β₁ = Σ(xᵢ − x̄)(yᵢ − ȳ) / Σ(xᵢ − x̄)², which needs some variation in x.
-                    For the taxi data: 6.56 minutes plus 3.47 minutes per mile. The coefficients are the model; everything a
-                    model knows lives in them, two numbers here and 124 million in GPT-2.</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>6. Gradient descent in code, and when the formula fails</span><span class="slides">slides 31 to 35</span></summary>
-                  <div class="bonus-body">
-                    <p>The whole walk is a dozen lines of Python: start at the flat line, compute the two slopes, nudge each
-                    coefficient against its slope, repeat 80 times. Why would anyone walk when there is a formula? Because the
-                    walk only needs slopes. It works for any model you can differentiate, including a neural network, for
-                    which there is no formula for the bottom.</p>
-                    <p>The matrix form β* = (XᵀX)⁻¹Xᵀy handles any number of inputs in one line. It fails when the columns of X
-                    are not independent (square feet and square metres as two inputs, or more inputs than examples), and it
-                    becomes impractical when XᵀX is simply too large to form. In both cases, iterative methods still work.</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>7. Reading R² honestly</span><span class="slides">slides 36 to 41</span></summary>
-                  <div class="bonus-body">
-                    <p class="q">R² = 0.75 does not mean 75% of trips were predicted correctly.</p>
-                    <p>It means the model eliminated 75% of the squared error that predicting the mean would leave. R² = 0 is no
-                    better than the mean; R² = 1 is a perfect fit; R² can be negative on new data (never on the data the line
-                    was fit to). People use it because it has no units, so the taxi model and the GPT-2 probe can be compared
-                    on one scale. That is also its weakness, so the slides add RMSE and MAE in minutes: knowing the distance cuts
-                    the typical miss from 10.8 to 6.9 minutes.</p>
-                    <p>The honest score is on held-out data. Adding features can only raise training R²; test R² can fall. The gap
-                    between them is overfitting.</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>8. More features: rush hour and airports</span><span class="slides">slides 42 to 50</span></summary>
-                  <div class="bonus-body">
-                    <p>Add a rush-hour flag and the model becomes two parallel lines, 2.2 minutes apart. Add a distance × rush-hour
-                    term and the lines can have different slopes: rush hour turns out not to be a fixed delay but a 39% slowdown
-                    per mile. Held-out R² climbs from 0.60 to 0.62.</p>
-                    <p class="q">Airport trips average 35 minutes, three times a normal ride. Why does the airport feature get a
-                    <em>negative</em> coefficient (−2.1 minutes)?</p>
-                    <p>Because the model already knows the distance. Given the distance, airport trips are faster: highways, about
-                    4.2 minutes per mile against 7.3 elsewhere. A coefficient is the effect of a feature holding the others
-                    fixed. Read every coefficient that way. The section closes with the matrix form of the normal equations for
-                    any number of features.</p>
-                  </div>
-                </details>
-
-                <details>
-                  <summary><span>9. Inside GPT-2, in more detail</span><span class="slides">slides 51 to 59</span></summary>
-                  <div class="bonus-body">
-                    <p>The GPT-2 experiment written out in the lecture's own notation: two regressions with 769 coefficients each
-                    (768 features plus an intercept), fit by gradient descent on 24,665 training cities, with one partial
-                    derivative per coefficient and the same update rule as the taxi model. Then the learned coefficients applied
-                    to Chicago, number by number, and the held-out map with its two R² scores (0.56 for latitude, 0.70 for
-                    longitude).</p>
-                    <p>Finally, a bigger model. The same recipe on Llama 3.1 (8 billion parameters) gives a mean R² of 0.93
-                    against 0.63 for GPT-2 small. Nobody asked either model to build a map.</p>
-                  </div>
-                </details>
+        <section class="cell" id="now">
+          <div class="row">
+            <span class="prompt prompt-in">In [3]:</span>
+            <span class="code">juliette.now()</span>
+          </div>
+          <div class="row row-out">
+            <span class="prompt" aria-hidden="true">Out[3]:</span>
+            <div class="out">
+              <p class="intro">
+                This fall I am co-teaching <a href="https://codeinplace.stanford.edu/cipx/intro">Code in Place X</a> with
+                <a href="https://sierrawang.github.io/">Sierra Wang</a>: a free global course on learning to program alongside AI.
+                Three of the projects inside it:
+              </p>
+              <div class="list">
+                <div><strong>Twists</strong> · Re-thinking what and how we teach.</div>
+                <div><strong>SimTeach</strong> · Re-thinking how we assess teachers.</div>
+                <div><strong>Student Summaries</strong> · Re-thinking how we understand students.</div>
               </div>
             </div>
           </div>
@@ -346,11 +256,11 @@
 
         <section class="cell" id="reading">
           <div class="row">
-            <span class="prompt prompt-in">In [3]:</span>
+            <span class="prompt prompt-in">In [4]:</span>
             <span class="code">reading.list()</span>
           </div>
           <div class="row row-out">
-            <span class="prompt" aria-hidden="true">Out[3]:</span>
+            <span class="prompt" aria-hidden="true">Out[4]:</span>
             <div class="out">
               <div class="list">
                 <div>
@@ -386,11 +296,11 @@
 
         <section class="cell" id="credits">
           <div class="row">
-            <span class="prompt prompt-in">In [4]:</span>
+            <span class="prompt prompt-in">In [5]:</span>
             <span class="code">credits.print()</span>
           </div>
           <div class="row row-out">
-            <span class="prompt" aria-hidden="true">Out[4]:</span>
+            <span class="prompt" aria-hidden="true">Out[5]:</span>
             <div class="out">
               <div class="list">
                 <div>The slides run on the slide tool built for Stanford's <a href="https://pai.stanford.edu/">PAI</a> course by
