@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <title>Juliette Woodrow · Lectures at MIT</title>
+  <meta name="description" content="Slides and bonus material for Juliette Woodrow's two guest lectures at MIT: linear regression (with a map hidden inside GPT-2) and a tour inside a large language model." />
+  <meta property="og:title" content="Juliette Woodrow · Lectures at MIT" />
+  <meta property="og:description" content="Slides and bonus material: linear regression, and inside a large language model." />
+  <meta property="og:image" content="https://juliettewoodrow.github.io/juliette_square.jpg" />
+  <meta property="og:url" content="https://juliettewoodrow.github.io/mit/" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-text: #1a1a1a;
+      --color-text-secondary: #555;
+      --color-accent: #7c3aed;
+      --color-accent-hover: #5b21b6;
+      --color-bg: #fbfaf7;
+      --color-surface: #fff;
+      --color-border: #e6e3dc;
+      --color-code-bg: #f1efe9;
+      --color-ink: #0b0b10;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--color-bg); }
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { color: var(--color-accent-hover); text-decoration: underline; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 3px; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    .page { display: flex; justify-content: center; padding: 3rem 1rem 4rem; }
+    .main { width: 100%; max-width: 900px; }
+
+    .crumb { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.8rem; color: #6b6b6b; margin-bottom: 1.5rem; }
+    .crumb a { color: #6b6b6b; }
+    .crumb a:hover { color: var(--color-accent); }
+
+    .header { display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap; padding-bottom: 0.5rem; }
+    .photo { flex: 0 0 auto; }
+    .photo svg { display: block; }
+    .header-info { flex: 1 1 420px; min-width: 0; padding-top: 0.6rem; }
+    .kicker { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.8rem; color: #6b6b6b; letter-spacing: 0.02em; }
+    h1 { font-size: 2.3rem; line-height: 1.12; font-weight: 600; letter-spacing: -0.02em; margin-top: 0.4rem; }
+    .subtitle { margin-top: 0.5rem; font-size: 1.05rem; color: #3d3d3d; }
+    .bio { margin-top: 1.1rem; font-size: 1rem; line-height: 1.7; }
+    .bio + .bio { margin-top: 0.75rem; color: #3d3d3d; }
+    .links { margin-top: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: 0.9rem; }
+
+    .cells { display: flex; flex-direction: column; gap: 2.25rem; margin-top: 2.25rem; }
+    .cell { scroll-margin-top: 2rem; }
+    .row { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 1rem; }
+    .row-out { margin-top: 1rem; }
+    .prompt { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.75rem; color: #9a9a9a; padding-top: 0.25rem; }
+    .prompt-in { padding-top: 1.1rem; }
+    .code { display: block; width: 100%; color: inherit; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.95rem; line-height: 1.7; background: var(--color-code-bg); border-radius: 10px; padding: 1rem 1.25rem; white-space: pre-wrap; }
+    .out { min-width: 0; }
+
+    .lecture-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.875rem; }
+    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 1.1rem 1.1rem 1.2rem; display: flex; flex-direction: column; }
+    .card-when { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.75rem; color: #6b6b6b; }
+    .card-name { margin-top: 0.35rem; font-weight: 600; font-size: 1.1rem; line-height: 1.3; }
+    .card-desc { margin-top: 0.5rem; font-size: 0.9rem; line-height: 1.6; color: #3d3d3d; }
+    .card-list { margin: 0.6rem 0 0 1.1rem; font-size: 0.875rem; line-height: 1.55; color: #3d3d3d; }
+    .card-list li + li { margin-top: 0.2rem; }
+    .card-actions { margin-top: auto; padding-top: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--color-ink); color: #fff; border-radius: 8px; padding: 0.5rem 0.9rem; font-size: 0.875rem; font-weight: 500; }
+    .btn:hover { background: var(--color-accent-hover); color: #fff; text-decoration: none; }
+    .btn-ghost { background: transparent; color: var(--color-accent); border: 1px solid var(--color-border); }
+    .btn-ghost:hover { background: #f4f0ff; color: var(--color-accent-hover); }
+    .hint { font-size: 0.8rem; color: #6b6b6b; margin-top: 0.75rem; }
+
+    .intro { font-size: 0.95rem; line-height: 1.65; color: #3d3d3d; margin-bottom: 1rem; }
+
+    .bonus { display: flex; flex-direction: column; gap: 0.75rem; }
+    .bonus details { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 0 1.1rem; }
+    .bonus summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; padding: 0.9rem 0; font-weight: 600; font-size: 0.98rem; }
+    .bonus summary::-webkit-details-marker { display: none; }
+    .bonus summary > span:first-of-type { flex: 1 1 auto; }
+    .bonus summary .slides { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.75rem; color: #6b6b6b; font-weight: 400; white-space: nowrap; }
+    .bonus summary::before { content: "▸"; color: #9a9a9a; margin-right: 0.6rem; font-size: 0.8rem; }
+    .bonus details[open] summary::before { content: "▾"; }
+    .bonus-body { padding: 0 0 1rem 1.3rem; font-size: 0.9rem; line-height: 1.65; color: #3d3d3d; }
+    .bonus-body p + p { margin-top: 0.5rem; }
+    .bonus-body .q { color: var(--color-text); font-weight: 500; }
+
+    .list { display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.92rem; line-height: 1.55; }
+    .list .meta { font-size: 0.85rem; color: #6b6b6b; }
+
+    .footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--color-border); font-size: 0.85rem; color: #6b6b6b; }
+
+    @media (max-width: 700px) {
+      .row { grid-template-columns: 1fr; gap: 0.25rem; }
+      .prompt, .prompt-in { padding-top: 0; }
+      .lecture-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.9rem; }
+      .bonus summary { flex-direction: column; gap: 0.15rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="main">
+      <p class="crumb"><a href="/">juliettewoodrow.github.io</a> / mit</p>
+
+      <header class="header">
+        <div class="photo">
+          <svg width="180" height="180" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Photo of Juliette Woodrow">
+            <circle cx="110" cy="110" r="100" stroke="pink" stroke-width="5" fill="none" />
+            <clipPath id="circleView"><circle cx="110" cy="110" r="90" /></clipPath>
+            <image href="/juliette_web.jpg" width="500" height="500" x="-70" y="-100" clip-path="url(#circleView)" />
+          </svg>
+        </div>
+        <div class="header-info">
+          <p class="kicker">MIT · Thursday, November 19, 2026</p>
+          <h1>Two short lectures on learning from data</h1>
+          <p class="subtitle">Linear regression, with a map hidden inside GPT-2. Then a look inside a large language model.</p>
+          <p class="bio">
+            Hi, I'm <a href="/">Juliette Woodrow</a>. I'm a PhD candidate in Computer Science at Stanford, advised by
+            <a href="https://stanford.edu/~cpiech/bio/index.html">Chris Piech</a>. I build AI systems for education and I
+            teach: I have lectured Stanford's CS106A and CS109, and I help run
+            <a href="https://codeinplace.stanford.edu/">Code in Place</a>, a free global programming course.
+          </p>
+          <p class="bio">
+            This page collects everything from today's lectures: the slides, the data, and a set of bonus slides for anyone
+            who wants to go further. My full website, papers and CV are at
+            <a href="/">juliettewoodrow.github.io</a>.
+          </p>
+          <p class="links">
+            <a href="/">Website</a>
+            <a href="/juliette_woodrow_cv.pdf">CV</a>
+            <a href="https://scholar.google.com/citations?user=NsCBeoEAAAAJ&amp;hl=en">Google Scholar</a>
+            <span class="mono">jwoodrow at stanford dot edu</span>
+          </p>
+        </div>
+      </header>
+
+      <div class="cells">
+
+        <section class="cell" id="slides">
+          <div class="row">
+            <span class="prompt prompt-in">In [1]:</span>
+            <span class="code">slides.open()</span>
+          </div>
+          <div class="row row-out">
+            <span class="prompt" aria-hidden="true">Out[1]:</span>
+            <div class="out">
+              <div class="lecture-grid">
+                <article class="card">
+                  <p class="card-when">Lecture 1 · 25 minutes</p>
+                  <h2 class="card-name">Linear regression: a map inside GPT-2</h2>
+                  <p class="card-desc">
+                    GPT-2 turns the word "Chicago" into 768 numbers. Can a straight line turn those numbers back into a
+                    latitude and longitude? We learn linear regression on 1.4 million real New York taxi rides, then point it
+                    at the inside of a language model.
+                  </p>
+                  <ul class="card-list">
+                    <li>Predict with a weighted sum of features. The coefficients are the model.</li>
+                    <li>Score a line by its mean squared error (ordinary least squares).</li>
+                    <li>Learn the coefficients two ways: gradient descent, or solve directly.</li>
+                    <li>Measure R² on rides the model never saw.</li>
+                    <li>Fit two regressions on GPT-2's internal representations of 24,665 cities and test on 6,118 held-out cities.</li>
+                  </ul>
+                  <div class="card-actions">
+                    <a class="btn" href="https://pai.stanford.edu/pai1/share/slides/PK75tDrqX1dWFvRIUv7xVHfk">Open slides ↗</a>
+                  </div>
+                </article>
+
+                <article class="card">
+                  <p class="card-when">Lecture 2 · 25 minutes</p>
+                  <h2 class="card-name">Inside a large language model</h2>
+                  <p class="card-desc">
+                    In 2022, researchers rewrote a fact inside GPT so it would say the Space Needle is in Paris. Where could a
+                    fact live inside a network? We open GPT-2 up, part by part, until the question has an answer.
+                  </p>
+                  <ul class="card-list">
+                    <li>From ten digit scores to 50,257 token scores: softmax gives every next token a probability.</li>
+                    <li>Word embeddings are learned parameters, and similar words get similar parameters.</li>
+                    <li>Attention lets a word read the words before it; learned weights decide how much from each.</li>
+                    <li>GPT-2 running live in the browser, writing one token at a time.</li>
+                  </ul>
+                  <div class="card-actions">
+                    <a class="btn" href="https://pai.stanford.edu/pai1/share/slides/hjmhBMtflsjHjzHiue91d6FC">Open slides ↗</a>
+                  </div>
+                </article>
+              </div>
+              <p class="hint">
+                The slides are interactive: use the arrow keys or click to step through each one, and the expand icon for
+                fullscreen. The demos run in your browser, so give a slide a second to load. No sign-in is needed.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cell" id="bonus">
+          <div class="row">
+            <span class="prompt prompt-in">In [2]:</span>
+            <span class="code">bonus.show()</span>
+          </div>
+          <div class="row row-out">
+            <span class="prompt" aria-hidden="true">Out[2]:</span>
+            <div class="out">
+              <p class="intro">
+                Twenty-five minutes is not long. These are the slides I built and set aside: the questions people usually ask,
+                the derivations in full, and a few more experiments. They are collected in one deck, in nine short sections.
+                Each section below says what it covers and where to find it.
+              </p>
+              <div class="card-actions" style="padding-top:0; margin-bottom: 1rem;">
+                <a class="btn" href="https://pai.stanford.edu/pai1/share/slides/zHnH9MDqZ4ZFFGkHCer0vS6J">Open the bonus deck (59 slides) ↗</a>
+              </div>
+
+              <div class="bonus">
+                <details>
+                  <summary><span>1. Why not just ask GPT-2 where a city is?</span><span class="slides">slides 1 to 3</span></summary>
+                  <div class="bonus-body">
+                    <p class="q">If we want to know whether GPT-2 knows where Cambridge is, why not ask it?</p>
+                    <p>We did. Prompted with "The latitude and longitude of Cambridge, Massachusetts is", GPT-2 small writes
+                    "about 1,000 miles (1,200 km) from" and never produces a coordinate. What a model is willing to <em>say</em>
+                    is not the same as what it <em>represents</em>. So the experiment asks a different question: when the model
+                    merely reads a city's name, is its location recoverable from the numbers inside, even though nobody asked?</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>2. More cities through the probe</span><span class="slides">slides 4 to 11</span></summary>
+                  <div class="bonus-body">
+                    <p>In the lecture we tried Chicago. Here the same two regression models (one for latitude, one for longitude)
+                    get New York City, Oslo, Reykjavík, Tehran and Cambridge, Massachusetts, none of which were used to fit the
+                    coefficients. Tehran lands 70 km off. New York lands in the Atlantic, 880 km off. Cambridge lands in Kansas,
+                    2,230 km off: GPT-2 small does not know where MIT is.</p>
+                    <p>The section ends with the debate these results feed: is a map "in there", or is this parroting? Being able
+                    to decode a quantity with a straight line shows the information is present. It does not show the model uses it.</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>3. Why the squared vertical error?</span><span class="slides">slides 12 to 15</span></summary>
+                  <div class="bonus-body">
+                    <p class="q">Why square the errors instead of adding them? Why measure vertically and not perpendicular to the line?</p>
+                    <p>Adding signed errors over all 1,154,203 training trips gives exactly zero for the line through the mean:
+                    plus 3.18 million minutes above, minus 3.18 million below. The sum measures the balance of over- and
+                    under-prediction, not closeness. Squaring stops the cancellation and weights a 10-minute miss 25 times more
+                    than a 2-minute miss. Absolute error is a valid alternative (it gives a median-style fit). Squared error is
+                    also the maximum-likelihood choice when the noise around the line is Gaussian.</p>
+                    <p>Vertical, because the task is to predict a duration <em>given</em> a distance. The vertical gap is the
+                    number of minutes our prediction missed by. Perpendicular distance (total least squares) answers a different
+                    question, useful when both coordinates are measured with error.</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>4. From maximum likelihood to gradient descent</span><span class="slides">slides 16 to 20</span></summary>
+                  <div class="bonus-body">
+                    <p>The review I cut for time. Maximum likelihood picks the parameters that make the data most likely. With one
+                    parameter (seven heads in ten flips) you can find the top of the log-likelihood by gradient <em>ascent</em>:
+                    find the slope, step uphill, repeat, and stop at p = 0.7. Machine learning usually has a loss we want
+                    small instead, so we flip the sign and descend. Gradient descent is the same one move, downhill.</p>
+                    <p>The last slide is the picture I like best: climbing a real mountain in the fog (the Island of Hawai'i, from
+                    a real elevation model) when all you can read is the altimeter under your feet.</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>5. The derivation, step by step</span><span class="slides">slides 21 to 30</span></summary>
+                  <div class="bonus-body">
+                    <p>Everything the lecture compressed into two slides. The goal: find β₀, β₁ that minimise
+                    L(β₀, β₁) = (1/n) Σ [yᵢ − (β₀ + β₁xᵢ)]². At the lowest point of the loss surface both slopes are zero.
+                    Step one, the chain rule applied to one trip and then summed, gives
+                    ∂L/∂β₀ = −(2/n) Σ (yᵢ − ŷᵢ) and ∂L/∂β₁ = −(2/n) Σ xᵢ(yᵢ − ŷᵢ). Step two, two ways: walk downhill, or
+                    set both to zero and solve.</p>
+                    <p>Solving: the first equation gives β₀ = ȳ − β₁x̄ (so the fitted line passes through the point of means).
+                    Substituting into the second gives β₁ = Σ(xᵢ − x̄)(yᵢ − ȳ) / Σ(xᵢ − x̄)², which needs some variation in x.
+                    For the taxi data: 6.56 minutes plus 3.47 minutes per mile. The coefficients are the model; everything a
+                    model knows lives in them, two numbers here and 124 million in GPT-2.</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>6. Gradient descent in code, and when the formula fails</span><span class="slides">slides 31 to 35</span></summary>
+                  <div class="bonus-body">
+                    <p>The whole walk is a dozen lines of Python: start at the flat line, compute the two slopes, nudge each
+                    coefficient against its slope, repeat 80 times. Why would anyone walk when there is a formula? Because the
+                    walk only needs slopes. It works for any model you can differentiate, including a neural network, for
+                    which there is no formula for the bottom.</p>
+                    <p>The matrix form β* = (XᵀX)⁻¹Xᵀy handles any number of inputs in one line. It fails when the columns of X
+                    are not independent (square feet and square metres as two inputs, or more inputs than examples), and it
+                    becomes impractical when XᵀX is simply too large to form. In both cases, iterative methods still work.</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>7. Reading R² honestly</span><span class="slides">slides 36 to 41</span></summary>
+                  <div class="bonus-body">
+                    <p class="q">R² = 0.75 does not mean 75% of trips were predicted correctly.</p>
+                    <p>It means the model eliminated 75% of the squared error that predicting the mean would leave. R² = 0 is no
+                    better than the mean; R² = 1 is a perfect fit; R² can be negative on new data (never on the data the line
+                    was fit to). People use it because it has no units, so the taxi model and the GPT-2 probe can be compared
+                    on one scale. That is also its weakness, so the slides add RMSE and MAE in minutes: knowing the distance cuts
+                    the typical miss from 10.8 to 6.9 minutes.</p>
+                    <p>The honest score is on held-out data. Adding features can only raise training R²; test R² can fall. The gap
+                    between them is overfitting.</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>8. More features: rush hour and airports</span><span class="slides">slides 42 to 50</span></summary>
+                  <div class="bonus-body">
+                    <p>Add a rush-hour flag and the model becomes two parallel lines, 2.2 minutes apart. Add a distance × rush-hour
+                    term and the lines can have different slopes: rush hour turns out not to be a fixed delay but a 39% slowdown
+                    per mile. Held-out R² climbs from 0.60 to 0.62.</p>
+                    <p class="q">Airport trips average 35 minutes, three times a normal ride. Why does the airport feature get a
+                    <em>negative</em> coefficient (−2.1 minutes)?</p>
+                    <p>Because the model already knows the distance. Given the distance, airport trips are faster: highways, about
+                    4.2 minutes per mile against 7.3 elsewhere. A coefficient is the effect of a feature holding the others
+                    fixed. Read every coefficient that way. The section closes with the matrix form of the normal equations for
+                    any number of features.</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary><span>9. Inside GPT-2, in more detail</span><span class="slides">slides 51 to 59</span></summary>
+                  <div class="bonus-body">
+                    <p>The GPT-2 experiment written out in the lecture's own notation: two regressions with 769 coefficients each
+                    (768 features plus an intercept), fit by gradient descent on 24,665 training cities, with one partial
+                    derivative per coefficient and the same update rule as the taxi model. Then the learned coefficients applied
+                    to Chicago, number by number, and the held-out map with its two R² scores (0.56 for latitude, 0.70 for
+                    longitude).</p>
+                    <p>Finally, a bigger model. The same recipe on Llama 3.1 (8 billion parameters) gives a mean R² of 0.93
+                    against 0.63 for GPT-2 small. Nobody asked either model to build a map.</p>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cell" id="reading">
+          <div class="row">
+            <span class="prompt prompt-in">In [3]:</span>
+            <span class="code">reading.list()</span>
+          </div>
+          <div class="row row-out">
+            <span class="prompt" aria-hidden="true">Out[3]:</span>
+            <div class="out">
+              <div class="list">
+                <div>
+                  <a href="https://arxiv.org/abs/2310.02207">Language Models Represent Space and Time</a>
+                  <div class="meta">Wes Gurnee and Max Tegmark, MIT, 2023. The paper behind lecture 1. They fit ridge-regression probes on
+                  Llama-2's hidden states; the lecture's GPT-2 numbers are my own classroom reproduction with plain least squares.</div>
+                </div>
+                <div>
+                  <a href="https://arxiv.org/abs/2202.05262">Locating and Editing Factual Associations in GPT</a>
+                  <div class="meta">Kevin Meng, David Bau, Alex Andonian and Yonatan Belinkov, NeurIPS 2022. The Space Needle experiment that opens lecture 2.</div>
+                </div>
+                <div>
+                  <a href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>
+                  <div class="meta">Vaswani et al., 2017. The transformer, which GPT-2 is one of.</div>
+                </div>
+                <div>
+                  <a href="https://www.statlearning.com/">An Introduction to Statistical Learning</a>
+                  <div class="meta">James, Witten, Hastie, Tibshirani and Taylor. Chapter 3 is the textbook treatment of linear regression, free online.</div>
+                </div>
+                <div>
+                  <a href="https://www.3blue1brown.com/topics/neural-networks">3Blue1Brown, Neural networks</a>
+                  <div class="meta">Grant Sanderson's visual series. The chapters on transformers and attention pair well with lecture 2.</div>
+                </div>
+                <div>
+                  <a href="https://www.kaggle.com/c/nyc-taxi-trip-duration">NYC Taxi Trip Duration</a>
+                  <div class="meta">The taxi data: 1,458,644 yellow-cab trips, January to June 2016, from the NYC Taxi and Limousine Commission via Kaggle.
+                  Trips under a minute or over two hours were removed; 1,442,754 remain, split 80/20 at random before any fitting.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cell" id="credits">
+          <div class="row">
+            <span class="prompt prompt-in">In [4]:</span>
+            <span class="code">credits.print()</span>
+          </div>
+          <div class="row row-out">
+            <span class="prompt" aria-hidden="true">Out[4]:</span>
+            <div class="out">
+              <div class="list">
+                <div>The slides run on the slide tool built for Stanford's <a href="https://pai.stanford.edu/">PAI</a> course by
+                  Chris Piech and the Code in Place team. Lecture 2 adapts slides and demos from Chris Piech's lesson on large language models in that course.
+                  GPT-2 is by OpenAI (2019); the in-browser demos use the open 124-million-parameter model.</div>
+                <div>Every number on the slides comes from real data: the taxi fits, the GPT-2 hidden states, the city coordinates and the Hawai'i
+                  terrain (Copernicus elevation data via Open-Meteo). Where a toy example is used, the slide says so.</div>
+                <div>Questions, corrections, or want the data? Write to me: <span class="mono">jwoodrow at stanford dot edu</span>.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <footer class="footer">
+        <a href="/">Juliette Woodrow</a> · <span class="mono">jwoodrow at stanford dot edu</span> · November 2026
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
